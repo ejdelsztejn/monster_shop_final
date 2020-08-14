@@ -12,7 +12,7 @@ RSpec.describe 'Edit Review Page' do
     end
 
     it 'I can link to an edit review form from the item show page' do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       within "#review-#{@review_1.id}" do
         click_button 'Edit'
@@ -29,7 +29,7 @@ RSpec.describe 'Edit Review Page' do
       fill_in 'Title', with: updated_title
       click_button 'Update Review'
 
-      expect(current_path).to eq(item_path(@ogre))
+      expect(current_path).to eq("/items/#{@ogre.id}")
       within "#review-#{@review_1.id}" do
         expect(page).to have_content(updated_title)
         expect(page).to have_content(@review_1.description)
@@ -49,7 +49,7 @@ RSpec.describe 'Edit Review Page' do
       fill_in 'Rating', with: updated_rating
       click_button 'Update Review'
 
-      expect(current_path).to eq(item_path(@ogre))
+      expect(current_path).to eq("/items/#{@ogre.id}")
       within "#review-#{@review_1.id}" do
         expect(page).to have_content(updated_title)
         expect(page).to have_content(updated_description)
